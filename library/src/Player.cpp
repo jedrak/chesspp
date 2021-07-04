@@ -136,6 +136,7 @@ void Player::setup() {
         buff = std::make_shared<King>(color, field);
         pieces.push_back(buff);
         field->setUnit(buff);
+        king = buff;
     }
     else
     {
@@ -190,6 +191,7 @@ void Player::setup() {
         buff = std::make_shared<King>(color, field);
         pieces.push_back(buff);
         field->setUnit(buff);
+        king = buff;
     }
 
 }
@@ -198,9 +200,6 @@ Player::~Player() {
 
 }
 
-void Player::makeMove(std::string move) {
-
-}
 
 void Player::calculatePossibleMoves() {
     allPossibleMoves.clear();
@@ -250,8 +249,24 @@ std::tuple<unitPtr, fieldPtr> Player::getPossibleMoveFromString(const std::strin
 
 }
 
-void Player::makeMove(std::tuple<unitPtr, fieldPtr> m) {
-    this->getGame()->getBoard()->move(std::get<0>(m)->getField(), std::get<1>(m));
+std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> Player::makeMove(std::tuple<unitPtr, fieldPtr> m) {
+    fieldPtr field = std::get<0>(m)->getField();
+    unitPtr buff = this->getGame()->getBoard()->move(std::get<0>(m)->getField(), std::get<1>(m));
+
+    return std::make_tuple(std::get<0>(m), field, std::get<1>(m), buff);
+}
+
+bool Player::canMove(const fieldPtr& field) {
+    for(auto moves : allPossibleMoves){
+        for(const auto& f: std::get<1>(moves)){
+            if(f->toString() == field->toString()) return true;
+        }
+    }
+    return false;
+}
+
+bool Player::isChecked() {
+    return this->game->getOtherPlayer()->canMove(this->king->getField());
 }
 
 

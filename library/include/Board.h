@@ -24,7 +24,7 @@ public:
     void display() const;
     //it returns all fields in specified direction
     std::vector<fieldPtr> Raycast(char color, int startX, int startY, int vX, int vY, int range=7);
-    void move(fieldPtr from, fieldPtr to);
+    unitPtr move(fieldPtr from, fieldPtr to);
 
 
 };

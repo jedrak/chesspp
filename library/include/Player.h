@@ -17,6 +17,7 @@ private:
     std::string _name;
     gamePtr game;
     char color;
+    unitPtr king;
     //pieces
     std::vector<unitPtr> pieces;
     std::vector<std::tuple<unitPtr, std::vector<fieldPtr>>> allPossibleMoves;
@@ -26,9 +27,10 @@ public:
     Player(std::string name, gamePtr game, char color);
     void calculatePossibleMoves();
     std::tuple<unitPtr, fieldPtr> getPossibleMoveFromString(const std::string&);
-    void makeMove(std::tuple<unitPtr, fieldPtr>);
+    std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> makeMove(std::tuple<unitPtr, fieldPtr>);
     void setup();
-
+    bool isChecked();
+    bool canMove(const fieldPtr& field);
     ~Player();
 
     void makeMove();

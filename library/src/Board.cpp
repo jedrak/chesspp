@@ -81,8 +81,10 @@ std::vector<fieldPtr> Board::Raycast(char color, int startX, int startY, int vX,
     return fields;
 }
 
-void Board::move(fieldPtr from, fieldPtr to) {
+unitPtr Board::move(fieldPtr from, fieldPtr to) {
+    unitPtr buff = to->getUnit();
     to->setUnit(from->getUnit());
     from->getUnit()->setField(to);
     from->setUnit(nullptr);
+    return buff;
 }
