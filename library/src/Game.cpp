@@ -40,26 +40,27 @@ void Game::simulate() {
     while(true)
     {
         std::string input;
+
+        std::cout<<"it's "<<activePlayer->getName()<<" turn"<<std::endl;
         std::cin>>input;
         try
         {
-            lastMove = activePlayer->makeMove(activePlayer->getPossibleMoveFromString(input));
-            board->display();
+            activePlayer->makeMove(activePlayer->getPossibleMoveFromString(input));
+
             activePlayer = getOtherPlayer();
 
             player1->calculatePossibleMoves();
             player2->calculatePossibleMoves();
-            if(activePlayer->isChecked()) std::cout<< "Player " << activePlayer->getGame()<<" is checked"<<std::endl;
+
+            //player1->deleteIllegalMoves();
+            //player2->deleteIllegalMoves();
+            board->display();
+            if(activePlayer->isChecked()) std::cout<< "Player " << activePlayer->getName()<<" is checked"<<std::endl;
 
         } catch (std::invalid_argument& ia) {
-            if(input == "r"){
-                std::cout<<"Reverting move"<<std::endl;
-                revertMove();
-                board->display();
-            }else{
-                std::cerr << "Invalid argument: " << ia.what() << '\n';
-                activePlayer->displayPossibleMoves();
-            }
+
+            std::cerr << "Invalid argument: " << ia.what() << '\n';
+            activePlayer->displayPossibleMoves();
 
         }
 
@@ -71,11 +72,11 @@ void Game::simulate() {
 }
 
 Game::Game() {
-    player1 = std::make_shared<Player>(Player("player1", std::shared_ptr<Game>(this), 'W'));
-    player2 = std::make_shared<Player>(Player("player2", std::shared_ptr<Game>(this), 'B'));
+    player1 = std::make_shared<Player>(Player("White", std::shared_ptr<Game>(this), 'W'));
+    player2 = std::make_shared<Player>(Player("Black", std::shared_ptr<Game>(this), 'B'));
 }
 
-void Game::revertMove() {
+void Game::revertMove(std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove) {
     unitPtr mover = std::get<0>(lastMove), taker = std::get<3>(lastMove);
     fieldPtr from = std::get<1>(lastMove), to = std::get<2>(lastMove);
     board->move(to,from);

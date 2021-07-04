@@ -60,7 +60,6 @@ Board::Board(){
 std::vector<fieldPtr> Board::Raycast(char color, int startX, int startY, int vX, int vY, int range) {
     std::vector<fieldPtr> fields;
 
-    //std::cout<<"Raycast"<<std::endl;
     for(int i = startX, j = startY, counter=0; i<8 && i>=0 && j<8 && j>=0 && counter < range; i+=vX, j+=vY, counter++){
         //std::cout<<this->getField(i, j)->toString();
         fieldPtr current = this->getField(i,j);

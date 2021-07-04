@@ -11,7 +11,7 @@ private:
     playerPtr player2;
     playerPtr activePlayer;
     boardPtr board;
-    std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove;
+    //std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove;
 
 public:
     Game();
@@ -25,7 +25,7 @@ public:
     const boardPtr &getBoard() const;
 
     void simulate();
-    void revertMove();
+    void revertMove(std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove);
 };
 
 

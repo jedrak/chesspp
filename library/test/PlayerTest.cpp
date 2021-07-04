@@ -8,10 +8,10 @@
 
 BOOST_AUTO_TEST_SUITE(PlayerSuite)
 
-    BOOST_AUTO_TEST_CASE(Setup)
+    /*BOOST_AUTO_TEST_CASE(Setup)
     {
         Game
 
-    }
+    }*/
 
 BOOST_AUTO_TEST_SUITE_END()

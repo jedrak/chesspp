@@ -28,6 +28,7 @@ public:
     void calculatePossibleMoves();
     std::tuple<unitPtr, fieldPtr> getPossibleMoveFromString(const std::string&);
     std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> makeMove(std::tuple<unitPtr, fieldPtr>);
+    void deleteIllegalMoves();
     void setup();
     bool isChecked();
     bool canMove(const fieldPtr& field);

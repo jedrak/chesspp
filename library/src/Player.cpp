@@ -256,6 +256,8 @@ std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> Player::makeMove(std::tuple<uni
     return std::make_tuple(std::get<0>(m), field, std::get<1>(m), buff);
 }
 
+
+
 bool Player::canMove(const fieldPtr& field) {
     for(auto moves : allPossibleMoves){
         for(const auto& f: std::get<1>(moves)){
@@ -268,5 +270,25 @@ bool Player::canMove(const fieldPtr& field) {
 bool Player::isChecked() {
     return this->game->getOtherPlayer()->canMove(this->king->getField());
 }
+
+void Player::deleteIllegalMoves() {
+
+    auto possibleMoves = allPossibleMoves;
+    for(int i = 0; i < possibleMoves.size(); i++){
+        std::vector<fieldPtr> legal;
+        for(auto f: std::get<1>(possibleMoves[i])){
+            auto lastMove = this->makeMove(std::make_tuple(std::get<0>(possibleMoves[i]), f));
+            this->game->getBoard()->display();
+            std::cout<<isChecked()<<std::endl;
+            if(!this->isChecked()) legal.push_back(f);
+            else std::cout<<"not legal";
+            this->getGame()->revertMove(lastMove);
+        }
+        std::get<1>(possibleMoves[i]) = legal;
+
+    }
+    allPossibleMoves = possibleMoves;
+}
+
 
 
