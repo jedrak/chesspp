@@ -81,14 +81,8 @@ std::vector<fieldPtr> Board::Raycast(char color, int startX, int startY, int vX,
     return fields;
 }
 
-/*boardPtr Board::instance;
-
-boardPtr Board::getInstance() {
-    if(instance == nullptr){
-        auto* board = new Board();
-        boardPtr sharedBoard(board);
-        Board::instance = sharedBoard;
-    }
-    return Board::instance;
+void Board::move(fieldPtr from, fieldPtr to) {
+    to->setUnit(from->getUnit());
+    from->getUnit()->setField(to);
+    from->setUnit(nullptr);
 }
-*/

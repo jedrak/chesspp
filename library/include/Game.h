@@ -9,7 +9,7 @@ class Game {
 private:
     playerPtr player1;
     playerPtr player2;
-    playerPtr nextPlayer;
+    playerPtr activePlayer;
     boardPtr board;
 
 public:

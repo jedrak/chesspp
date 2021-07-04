@@ -29,7 +29,7 @@ include_directories(
 )
 
 set(SOURCE_TEST_FILES
-        test/master.cpp test/BishopTest.cpp test/RookTest.cpp test/QueenTest.cpp test/KnightTest.cpp test/KingTest.cpp test/PawnTest.cpp)
+        test/master.cpp test/BishopTest.cpp test/RookTest.cpp test/QueenTest.cpp test/KnightTest.cpp test/KingTest.cpp test/PawnTest.cpp test/PlayerTest.cpp)
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów
