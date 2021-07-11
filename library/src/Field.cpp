@@ -1,7 +1,6 @@
 #include "Field.h"
 #include "Unit.h"
 #include <string>
-#include <utility>
 #include <sstream>
 
 int Field::getX() const {
@@ -16,10 +15,6 @@ const unitPtr &Field::getUnit() const {
     return unit;
 }
 
-const boardPtr &Field::getBoard() const {
-    return board;
-}
-
 void Field::setUnit(const unitPtr &unit) {
     this->unit = unit;
 }
@@ -32,16 +27,10 @@ bool Field::occupied() const
         return false;
     }
 
-Field::Field(int x, int y) : x(x), y(y), unit(nullptr){
-
-}
+Field::Field(int x, int y) : x(x), y(y), unit(nullptr) {}
 
 std::string Field::toString() {
     std::stringstream ss;
-    ss<<(char)(x+'a')<<y+1;
+    ss << (char)(x+'a') << y+1;
     return ss.str();
 }
-
-
-
-

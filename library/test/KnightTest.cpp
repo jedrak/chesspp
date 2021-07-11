@@ -1,7 +1,3 @@
-//
-// Created by Andrzej on 7/4/2021.
-//
-
 #include "Bishop.h"
 #include "Board.h"
 #include "Game.h"
@@ -98,6 +94,7 @@ BOOST_AUTO_TEST_SUITE(KnightMovementSuite)
         unitPtr knight2 = std::make_shared<Knight>(Knight('B', nullptr));
         board->getField(2, 1)->setUnit(knight2);
         knight2->setField( board->getField(2, 1));
+
         board->display();
         std::vector<fieldPtr> moves = knight->calculatePossibleMoves(board);
 

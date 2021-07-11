@@ -1,9 +1,10 @@
-#include <iostream>
 #include "Game.h"
-#include "Bishop.h"
+#include <iostream>
+
+using namespace std;
 
 void Game::initialize() {
-    this->board = std::make_shared<Board>();
+    this->board = make_shared<Board>();
     this->activePlayer = player1;
     this->player1->setup();
     this->player2->setup();
@@ -11,19 +12,18 @@ void Game::initialize() {
     this->player1->calculatePossibleMoves();
     this->player2->calculatePossibleMoves();
 
-
 }
 
-playerPtr Game::getOtherPlayer() {
+playerPtr Game::getNextPlayer() {
     if(activePlayer == player1)
     {
         return player2;
-    }else
+    }
+    else
     {
         return player1;
     }
 }
-
 Game::~Game() {
 
 }
@@ -33,9 +33,9 @@ const boardPtr &Game::getBoard() const {
 }
 
 void Game::simulate() {
-    board->display();
-    //player1->displayPossibleMoves();
-    //player2->displayPossibleMoves();
+    if (getObserver() != nullptr) {
+        getObserver()->notify(getBoard());
+    }
 
     while(true)
     {
@@ -45,17 +45,36 @@ void Game::simulate() {
         std::cin>>input;
         try
         {
-            activePlayer->makeMove(activePlayer->getPossibleMoveFromString(input));
+            activePlayer->makeMove(activePlayer->getPossibleMoveFromString(input), false);
 
-            activePlayer = getOtherPlayer();
+            activePlayer = getNextPlayer();
 
-            player1->calculatePossibleMoves();
-            player2->calculatePossibleMoves();
+            activePlayer->calculatePossibleMoves();
+            getNextPlayer()->calculatePossibleMoves();
+            activePlayer->deleteIllegalMoves();
+            getNextPlayer()->deleteIllegalMoves();
 
-            //player1->deleteIllegalMoves();
-            //player2->deleteIllegalMoves();
-            board->display();
-            if(activePlayer->isChecked()) std::cout<< "Player " << activePlayer->getName()<<" is checked"<<std::endl;
+            if (getObserver() != nullptr) {
+                getObserver()->notify(getBoard());
+            }
+            if(activePlayer->isChecked()) std::cout<< "Player " << activePlayer->getName()<<" is checked";
+            if(activePlayer->getNumberOfMoves() == 0)
+            {
+                if(activePlayer->isChecked())
+                {
+                    std::cout<<" and mated." <<std::endl;
+                    std::cout<<"Player "<< getNextPlayer()->getName()<<" has won."<<std::endl;
+                }
+                else
+                {
+                    std::cout<<"Player has tied"<<std::endl;
+                }
+                break;
+            }
+            else if(activePlayer->isChecked())
+            {
+                std::cout<<"."<<std::endl;
+            }
 
         } catch (std::invalid_argument& ia) {
 
@@ -63,20 +82,16 @@ void Game::simulate() {
             activePlayer->displayPossibleMoves();
 
         }
-
-
     }
-
-
-
 }
 
-Game::Game() {
+Game::Game(const observerPtr &observer) : observer(observer) {
     player1 = std::make_shared<Player>(Player("White", std::shared_ptr<Game>(this), 'W'));
     player2 = std::make_shared<Player>(Player("Black", std::shared_ptr<Game>(this), 'B'));
 }
 
 void Game::revertMove(std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove) {
+    //board->display();
     unitPtr mover = std::get<0>(lastMove), taker = std::get<3>(lastMove);
     fieldPtr from = std::get<1>(lastMove), to = std::get<2>(lastMove);
     board->move(to,from);
@@ -85,7 +100,13 @@ void Game::revertMove(std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> lastMove)
         taker->setField(to);
         to->setUnit(taker);
     }
-
-
+    //board->display();
 }
 
+const observerPtr &Game::getObserver() const {
+    return observer;
+}
+
+const playerPtr &Game::getActivePlayer() const {
+    return activePlayer;
+}

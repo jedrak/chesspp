@@ -1,9 +1,5 @@
 #include "Knight.h"
 
-bool Knight::move(int x, int y) {
-    return false;
-}
-
 Knight::Knight(char color, fieldPtr field) : Unit('k', color, field){}
 
 

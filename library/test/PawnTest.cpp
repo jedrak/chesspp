@@ -1,7 +1,3 @@
-//
-// Created by Andrzej on 7/4/2021.
-//
-
 #include "Bishop.h"
 #include "Board.h"
 #include "Game.h"
@@ -24,7 +20,6 @@ BOOST_AUTO_TEST_SUITE(PawnMovementSuite)
         board->getField(0, 6)->setUnit(pawnB);
         pawnB->setField( board->getField(0, 6));
         board->display();
-        //std::vector<fieldPtr> moves = pawnB->calculatePossibleMoves(board);
 
         std::stringstream ss;
         for(fieldPtr field:moves)
@@ -56,7 +51,6 @@ BOOST_AUTO_TEST_SUITE(PawnMovementSuite)
         board->getField(0, 5)->setUnit(pawnB);
         pawnB->setField( board->getField(0, 5));
         board->display();
-        //std::vector<fieldPtr> moves = pawnB->calculatePossibleMoves(board);
 
         std::stringstream ss;
         for(fieldPtr field:moves)
@@ -88,7 +82,6 @@ BOOST_AUTO_TEST_SUITE(PawnMovementSuite)
         board->getField(1, 3)->setUnit(pawnB);
         pawnB->setField( board->getField(1, 3));
         board->display();
-        //std::vector<fieldPtr> moves = pawnB->calculatePossibleMoves(board);
         std::vector<fieldPtr> moves = pawnW->calculatePossibleMoves(board);
         std::stringstream ss;
         for(const fieldPtr& field:moves)

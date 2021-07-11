@@ -1,7 +1,3 @@
-//
-// Created by Andrzej on 7/4/2021.
-//
-
 #include "Bishop.h"
 #include "Board.h"
 #include "Game.h"
@@ -12,7 +8,7 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
    BOOST_AUTO_TEST_CASE(BishopCalculateA1)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
 
         board->getField(0, 0)->setUnit(newBishop);
         newBishop->setField( board->getField(0, 0));
@@ -31,7 +27,7 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateH1)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
 
         board->getField(7, 0)->setUnit(newBishop);
         newBishop->setField( board->getField(7, 0));
@@ -49,7 +45,7 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateA8)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
 
         board->getField(0, 7)->setUnit(newBishop);
         newBishop->setField( board->getField(0, 7));
@@ -67,7 +63,7 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateH8)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
 
         board->getField(7, 7)->setUnit(newBishop);
         newBishop->setField( board->getField(7, 7));
@@ -86,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateD4)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr newBishop = std::make_shared<Bishop>(Bishop('W', nullptr));
 
         board->getField(3, 3)->setUnit(newBishop);
         newBishop->setField( board->getField(3, 3));
@@ -104,11 +100,11 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateTwoBishopsDiffColors)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr Bishop1 = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr Bishop1 = std::make_shared<Bishop>(Bishop('W', nullptr));
         board->getField(0, 0)->setUnit(Bishop1);
         Bishop1->setField( board->getField(0, 0));
 
-        bishopPtr Bishop2 = std::make_shared<Bishop>(Bishop('B', nullptr));
+        unitPtr Bishop2 = std::make_shared<Bishop>(Bishop('B', nullptr));
         board->getField(7, 7)->setUnit(Bishop2);
         Bishop2->setField( board->getField(7, 7));
 
@@ -134,11 +130,11 @@ BOOST_AUTO_TEST_SUITE(BishopMovementSuite)
     BOOST_AUTO_TEST_CASE(BishopCalculateTwoBishopsSameColor)
     {
         boardPtr board = std::make_shared<Board>();
-        bishopPtr Bishop1 = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr Bishop1 = std::make_shared<Bishop>(Bishop('W', nullptr));
         board->getField(0, 0)->setUnit(Bishop1);
         Bishop1->setField( board->getField(0, 0));
 
-        bishopPtr Bishop2 = std::make_shared<Bishop>(Bishop('W', nullptr));
+        unitPtr Bishop2 = std::make_shared<Bishop>(Bishop('W', nullptr));
         board->getField(7, 7)->setUnit(Bishop2);
         Bishop2->setField( board->getField(7, 7));
 

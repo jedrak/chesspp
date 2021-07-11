@@ -12,11 +12,7 @@ private:
     fieldPtr field;
 
 public:
-    Unit(char type, char colour, const fieldPtr &field);
-
-    Unit();
-
-    virtual bool move(int x, int y) = 0;
+    Unit(char type, char colour, fieldPtr field);
 
     virtual std::vector<fieldPtr> calculatePossibleMoves(boardPtr board) = 0;
 
@@ -26,9 +22,7 @@ public:
 
     char getColour() const;
 
-    bool setField(const fieldPtr &field);
-
-
+    void setField(const fieldPtr &field);
 
 };
 

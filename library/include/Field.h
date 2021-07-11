@@ -17,15 +17,13 @@ public:
 
     const unitPtr &getUnit() const;
 
-    const boardPtr &getBoard() const;
-
     void setUnit(const unitPtr &unit);
 
     bool occupied() const;
 
     Field(int x, int y);
 
-    std::string  toString();
+    std::string toString();
 };
 
 

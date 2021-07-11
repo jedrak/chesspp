@@ -18,7 +18,4 @@ typedef std::shared_ptr<Board> boardPtr;
 class Game;
 typedef std::shared_ptr<Game> gamePtr;
 
-class Bishop;
-typedef std::shared_ptr<Bishop> bishopPtr;
-
 #endif //GAME_TYPEDEFS_H

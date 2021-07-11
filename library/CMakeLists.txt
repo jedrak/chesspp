@@ -12,7 +12,8 @@ set(SOURCE_FILES
         src/Pawn.cpp include/Pawn.h
         src/Queen.cpp include/Queen.h
         src/Knight.cpp include/Knight.h
-        src/Rook.cpp include/Rook.h)
+        src/Rook.cpp include/Rook.h
+        )
 
 #Utwórz bibliotekę typu STATIC, SHARED albo MODULE ze wskazanych źródeł
 add_library(Library ${SOURCE_FILES})
@@ -29,7 +30,7 @@ include_directories(
 )
 
 set(SOURCE_TEST_FILES
-        test/master.cpp test/BishopTest.cpp test/RookTest.cpp test/QueenTest.cpp test/KnightTest.cpp test/KingTest.cpp test/PawnTest.cpp test/PlayerTest.cpp)
+        test/master.cpp test/BishopTest.cpp test/RookTest.cpp test/QueenTest.cpp test/KnightTest.cpp test/KingTest.cpp test/PawnTest.cpp test/GameTest.cpp)
 add_executable (LibraryTest ${SOURCE_TEST_FILES})
 
 #dołącz bibliotekę z testowanymi klasami oraz bibliotekę boost.test do programu testów

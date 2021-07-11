@@ -1,8 +1,3 @@
-//
-// Created by Andrzej on 7/4/2021.
-//
-
-
 #include "Board.h"
 #include "Game.h"
 #include <boost/test/unit_test.hpp>

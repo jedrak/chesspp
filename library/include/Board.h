@@ -9,24 +9,20 @@
 class Board : public std::enable_shared_from_this<Board> {
 private:
     std::vector<std::vector<fieldPtr>> array;
-    //static boardPtr instance;
 
-    //static boardPtr instance;
 public:
     Board();
-    //static boardPtr getInstance();
-    virtual ~Board();
 
-    const std::vector<std::vector<fieldPtr>> &getArray() const;
+    virtual ~Board();
 
     fieldPtr getField(int x, int y);
 
-    void display() const;
-    //it returns all fields in specified direction
-    std::vector<fieldPtr> Raycast(char color, int startX, int startY, int vX, int vY, int range=7);
+    std::vector<fieldPtr> castRay(char color, int startX, int startY, int vX, int vY, int range=7);
+
     unitPtr move(fieldPtr from, fieldPtr to);
 
 
+    void display() const;
 };
 
 #endif //GAME_BOARD_H

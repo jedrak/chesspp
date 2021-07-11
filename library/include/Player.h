@@ -3,46 +3,57 @@
 
 #include <string>
 #include "typedefs.h"
-#include <Pawn.h>
-#include <Rook.h>
-#include <Queen.h>
-#include <Bishop.h>
-#include <Knight.h>
-#include <King.h>
+#include "Pawn.h"
+#include "Rook.h"
+#include "Queen.h"
+#include "Bishop.h"
+#include "Knight.h"
+#include "King.h"
 
 class Player {
 private:
-    Player(std::string name);
-
-    std::string _name;
+    std::string name;
     gamePtr game;
     char color;
     unitPtr king;
-    //pieces
     std::vector<unitPtr> pieces;
     std::vector<std::tuple<unitPtr, std::vector<fieldPtr>>> allPossibleMoves;
 public:
-    std::string getName() const;
-    void displayPossibleMoves();
+    const std::vector<std::tuple<unitPtr, std::vector<fieldPtr>>> &getAllPossibleMoves() const;
+
+public:
+    const unitPtr &getKing() const;
+
+public:
     Player(std::string name, gamePtr game, char color);
+
+    std::string getName() const;
+
+    void displayPossibleMoves();
+
     void calculatePossibleMoves();
+
     std::tuple<unitPtr, fieldPtr> getPossibleMoveFromString(const std::string&);
-    std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> makeMove(std::tuple<unitPtr, fieldPtr>);
+
+    std::tuple<unitPtr, fieldPtr, fieldPtr, unitPtr> makeMove(std::tuple<unitPtr, fieldPtr>, bool mock);
+
     void deleteIllegalMoves();
+
     void setup();
+
     bool isChecked();
+
     bool canMove(const fieldPtr& field);
-    ~Player();
 
-    void makeMove();
-
-    bool inCheck();
-
-    bool isWhite() const;
+    virtual ~Player();
 
     const gamePtr &getGame() const;
 
-    void makeMove(std::string move);
+    playerPtr getOtherPlayer(std::string name);
+
+    int getNumberOfMoves();
+
+    int getPiecesNumber();
 
 };
 
